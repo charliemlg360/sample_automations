@@ -3,7 +3,7 @@
 
 # Source and destination paths
 $sourcePath = "G:\new_crls\new_crls"
-$destinationPath = "\\tfr-nas\CRL"
+$destinationPath = "Destination_Goes_Here"
 
 # Check if source directory exists
 if (!(Test-Path $sourcePath)) {
@@ -36,5 +36,6 @@ foreach ($file in $crlFiles) {
         Write-Host "Failed to copy $($file.name): $_" -ForegroundColor Red
     }
 }
+
 
 Write-Host "File transfer completed! Copied $($crlFiles.Count) CRL Files." -ForegroundColor Cyan
