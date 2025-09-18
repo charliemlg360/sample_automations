@@ -1,46 +1,45 @@
 '''
 
-Script: Unzip the CRL File
+Script: Extract the DOD CRL Archive
 Author: Charlie Perez
 Date: July 2025
-Purpose: This script unzips the contents of your CRL zip file into a target directory and then removes the zip file itself.
+Purpose: This script extracts the DOD CRL archive and then removes the archive afterwards
 
 '''
 
 ''' IMPORT STANDARD LIBRARIES '''
+# This lets us work with files and folders
 import os
+# This lets us work with ZIP files
 import zipfile
 
 
 '''MAIN ENTRY POINT'''
-# Define the main function
+# This function extracts CRL files from a ZIP archive
 def unzip_crls():
-    # Define a variable called download_dir, where your CRL files are
-    download_dir = r"C:\Users\carlitos\Downloads\new_crls"
-
-    # Define a variable called zip_file, which stores the path to the ZIP file
+    # The folder where our ZIP file is located
+    download_dir = r"C:\Users\Carlos.Perez\Downloads\new_crls"
+    # The full path to our ZIP file
     zip_file = os.path.join(download_dir, 'ALLCRLZIP.zip')
-
-    # Check if the ZIP file exists
+    
+    # Check if the ZIP file actually exists
     if os.path.exists(zip_file):
-        # Use the zipfile.ZipFile function to open the ZIP file in read mode
+        # Open the ZIP file
         with zipfile.ZipFile(zip_file, 'r') as zip_ref:
-            # Use the extractall method to extract the contents of the ZIP file to the download directory
+            # Extract everything from the ZIP file to our folder
             zip_ref.extractall(download_dir)
-
-        # Print a success message
+        
+        # Tell the user it worked
         print("Successfully unzipped the CRL bundle")
-
-        # Use the os.remove function to remove the ZIP file
+        
+        # Delete the ZIP file since we don't need it anymore
         os.remove(zip_file)
-
-        # Print a message indicating that the ZIP file has been removed
         print("Removed the ZIP file")
     else:
-        # Print an error message if the ZIP file does not exist
+        # Tell the user if we couldn't find the ZIP file
         print("No ZIP file found to unzip")
 
-# Check to see if script is being executed directly
+# This code runs when you execute this script directly
 if __name__ == "__main__":
-    # Calls the unzip_crls function
+    # Start the unzipping process
     unzip_crls()
