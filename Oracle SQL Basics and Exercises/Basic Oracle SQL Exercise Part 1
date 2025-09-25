@@ -1,0 +1,92 @@
+Basic Oracle SQL Exercise (Part 1)
+
+
+Create a table for your dnd characters.
+
+CREATE TABLE dnd_characters (
+     character_id      NUMBER PRIMARY KEY,    
+     character_name    VARCHAR2(50) NOT NULL,   
+     character_class   VARCHAR2(50) NOT NULL,    
+     character_level   NUMBER
+     );
+
+
+Show the structure of your dnd_characters table.
+
+DESC dnd_characters;
+
+
+Change the the name of a column in your dnd_characters table if needed.
+
+ALTER TABLE dnd_characters
+RENAME COLUMN character_class to character_profession; 
+
+
+
+Populate your table with your characters.
+
+INSERT INTO dnd_characters (character_id, character_name, character_class, character_level)
+    VALUES (1, 'Vris Icenclaw', 'Dark Knight', 15);
+
+INSERT INTO dnd_characters (character_id, character_name, character_class, character_level)
+    VALUES (2, 'Calistus Nivose', 'Landstalker', 12);
+
+INSERT INTO dnd_characters (character_id, character_name, character_class, character_level)
+    VALUES (3, 'Sylvie Helhiem', 'Summoner', 4);
+
+INSERT INTO dnd_characters (character_id, character_name, character_class, character_level)
+    VALUES (4, 'Elwynn Vendred', 'Shillen Knight', 7);
+
+
+
+
+Retreve information about a character in your table.
+
+SELECT * FROM dnd_characters WHERE character_name = 'Sylvie Helheim';
+
+
+Change a character's name if needed.
+
+UPDATE dnd_characters
+    SET character_name = 'Sylvie Frostfall'
+    WHERE character_name = 'Sylvie Helheim';
+
+
+Format your dnd_characters table for readability.
+
+SET LINESIZE 100;
+    SET PAGESIZE 50;
+    COLUMN character_id FORMAT 999 HEADING 'ID'
+    COLUMN character_name FORMAT A20 HEADING 'Character Name'
+    COLUMN character_class FORMAT A15 HEADING 'CLASS'
+    COLUMN character_level FORMAT 999 HEADING 'Level'
+    SELECT * FROM dnd_characters;
+
+This is the result:
+
+  ID Character Name	  CLASS 	  Level
+---- -------------------- --------------- -----
+   1 Vris Icenclaw	  Dark Knight	     15
+   2 Calistus Nivose  Landstalker	     12
+   3 Sylvie Helheim	  Summoner	          4
+   4 Elwynn Vendred	  Shillen Knight      7
+
+
+
+Change a character's level.
+
+#Make your changes.
+UPDATE dnd_characters
+SET character_level = 7
+WHERE character_name = 'Elwynn Vendred';
+
+#Verify changes
+SELECT character_name, character_level
+FROM dnd_characters
+WHERE character_name = 'Elwynn Vendred';
+
+#Commit or rollback
+COMMIT;
+or
+ROLLBACK;
+

@@ -1,0 +1,110 @@
+Basic Oracle SQL Exercise (Part 2)
+
+Create a table for your dnd equipment items.
+
+CREATE TABLE dnd_equipment (
+item_id NUMBER PRIMARY KEY,
+item_name VARCHAR2(100) NOT NULL,
+character_id NUMBER REFERENCES dnd_characters(character_id)
+);
+
+
+Insert equipment into your table.
+
+INSERT INTO dnd_equipment (item_id, item_name, character_id) VALUES (101, 'Nightrazor Claymore', 1);
+
+INSERT INTO dnd_equipment (item_id, item_name, character_id) VALUES (102, 'Gargoyle Claw Longbow', 2);
+
+INSERT INTO dnd_equipment (item_id, item_name, character_id) VALUES (103, 'Astra Nocturne Spellbook', 3);
+
+INSERT INTO dnd_equipment (item_id, item_name, character_id) VALUES (104, 'The Spike of Midnight Longsword', 4);
+
+
+
+Retreive info from your dnd_equipment table.
+
+SELECT * FROM dnd_equipment;
+
+
+
+
+List character names with equipment names.
+
+SELECT dnd_characters.character_name, dnd_equipment.item_name
+FROM dnd_characters
+LEFT JOIN dnd_equipment
+ON dnd_characters.character_id = dnd_equipment.character_id;
+
+
+
+Create a dnd spell table.
+
+CREATE TABLE dnd_spells (
+spell_id NUMBER PRIMARY KEY,
+spell_name VARCHAR2(100) NOT NULL UNIQUE,
+spell_description VARCHAR2(200)
+);
+
+
+Insert Spells into your spell table.
+
+INSERT INTO dnd_spells (spell_id, spell_name, spell_description) VALUES (201, 'Living Dead', 'Links one''s soul to the underworld allowing HP to drop below 0 without death. Attacks gain 100% HP STEAL for the duration of the spell.') ;
+
+INSERT INTO dnd_spells (spell_id, spell_name, spell_description) VALUES (202, 'Arrow Revolver', 'The next six arrow strikes ignore armor, gain the piercing quality, and are free actions.') ;
+
+INSERT INTO dnd_spells (spell_id, spell_name, spell_description) VALUES (203, 'Tear the Gates', 'Open a wound into the underworld. Undead horrors assail enemies for six rounds. INCREASE cast speed by 80%. INCREASE MAGIC ATTACK by 50% . WILL POWER and VITALITY drop by 70%.') ;
+
+INSERT INTO dnd_spells (spell_id, spell_name, spell_description) VALUES (204, 'Unmend', 'Ranged dark magic strike that opens enemy wounds and decreases healing or regeneration effectiveness by 70% for three rounds.') ;
+
+
+
+
+
+Link your spells to character IDs.
+
+CREATE TABLE character_spells (
+character_id NUMBER REFERENCES dnd_characters(character_id),
+spell_id NUMBER REFERENCES dnd_spells(spell_id),
+CONSTRAINT pk_character_spells PRIMARY KEY (character_id, spell_id)
+
+);
+
+
+INSERT INTO character_spells (character_id, spell_id) VALUES (1, 201);
+
+INSERT INTO character_spells (character_id, spell_id) VALUES (2, 202);
+
+INSERT INTO character_spells (character_id, spell_id) VALUES (3, 203);
+
+INSERT INTO character_spells (character_id, spell_id) VALUES (4, 204);
+
+
+
+Create a character sheet for your characters that includes their attributes, equipment and spells.
+First use your dba account to allow your user to create VIEWS.
+
+GRANT CREATE VIEW TO your_user_account;
+
+
+CREATE VIEW v_character_sheet AS
+SELECT
+dnd_characters.character_name,
+dnd_characters.character_level,
+dnd_characters.character_class,
+dnd_equipment.item_name,
+dnd_spells.spell_name
+FROM
+dnd_characters
+LEFT JOIN
+dnd_equipment ON dnd_characters.character_id = dnd_equipment.character_id
+LEFT JOIN
+character_spells ON dnd_characters.character_id = character_spells.character_id
+LEFT JOIN
+dnd_spells ON character_spells.spell_id = dnd_spells.spell_id;
+
+
+Use this command to view your sheet.
+
+SELECT * FROM v_character_sheet WHERE character_name = 'Vris Icenclaw';
+
+
