@@ -1,6 +1,5 @@
 Basic Oracle SQL Exercise (Part 1)
 
-
 Create a table for your dnd characters.
 
 CREATE TABLE dnd_characters (
@@ -39,7 +38,7 @@ INSERT INTO dnd_characters (character_id, character_name, character_class, chara
 
 
 
-Retreve information about a character in your table.
+Retrieve information about a character in your table.
 
 SELECT * FROM dnd_characters WHERE character_name = 'Sylvie Helheim';
 
