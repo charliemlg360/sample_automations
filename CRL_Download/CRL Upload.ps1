@@ -1,4 +1,4 @@
-#check# CRL Upload
+# CRL Upload
 # 21AUG25
 
 # Source and destination paths
@@ -36,5 +36,6 @@ foreach ($file in $crlFiles) {
         Write-Host "Failed to copy $($file.name): $_" -ForegroundColor Red
     }
 }
+
 
 Write-Host "File transfer completed! Copied $($crlFiles.Count) CRL Files." -ForegroundColor Cyan
