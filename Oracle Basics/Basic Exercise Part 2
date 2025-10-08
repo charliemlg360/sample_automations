@@ -21,7 +21,7 @@ INSERT INTO dnd_equipment (item_id, item_name, character_id) VALUES (104, 'The S
 
 
 
-Retreive info from your dnd_equipment table.
+Retrieve info from your dnd_equipment table.
 
 SELECT * FROM dnd_equipment;
 
@@ -52,9 +52,7 @@ INSERT INTO dnd_spells (spell_id, spell_name, spell_description) VALUES (202, 'A
 
 INSERT INTO dnd_spells (spell_id, spell_name, spell_description) VALUES (203, 'Tear the Gates', 'Open a wound into the underworld. Undead horrors assail enemies for six rounds. INCREASE cast speed by 80%. INCREASE MAGIC ATTACK by 50% . WILL POWER and VITALITY drop by 70%.') ;
 
-INSERT INTO dnd_spells (spell_id, spell_name, spell_description) VALUES (204, 'Unmend', 'Ranged dark magic strike that opens enemy wounds and decreases healing or regeneration effectiveness by 70% for three rounds.') ;
-
-
+INSERT INTO dnd_spells (spell_id, spell_name, spell_description) VALUES (204, 'Unmend', 'Ranged dark magic strike that opens enemy wounds and decreases healing and regeneration effectiveness by 70% for three rounds.') ;
 
 
 
