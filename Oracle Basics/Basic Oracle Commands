@@ -7,7 +7,7 @@ SHOW USER;
 SELECT USER FROM DUAL;
 
 
-Create a new user with connect, and create table priveleges. 
+Create a new user with connect, and create table privileges. 
 
 CREATE USER your_user_name IDENTIFIED BY your_password;
 
